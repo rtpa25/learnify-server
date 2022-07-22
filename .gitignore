@@ -28,3 +28,6 @@ yarn-error.log*
 
 # out dir
 dist/
+
+# todo file for internal documentation and task assignment
+dump.todo
