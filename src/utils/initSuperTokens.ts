@@ -1,18 +1,17 @@
 import Session from 'supertokens-node/recipe/session';
 import supertokens, { deleteUser } from 'supertokens-node';
 import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword';
+import { createUser } from '../services/user.service';
 let { Google, Github } = ThirdPartyEmailPassword;
 
 export const initSuperTokens = () => {
   supertokens.init({
     framework: 'express',
     supertokens: {
-      connectionURI:
-        'https://71fd05e16d0e11eca0fe73168c4aeb88-ap-southeast-1.aws.supertokens.io:3572',
-      apiKey: 'gWFypwtQ3Z7NIBrMr5B7SUB3URLaVb',
+      connectionURI: 'https://try.supertokens.io',
     },
     appInfo: {
-      appName: 'demo',
+      appName: 'learnify',
       apiDomain: 'http://localhost:8080',
       websiteDomain: 'http://localhost:3000',
       apiBasePath: '/auth',
@@ -25,10 +24,6 @@ export const initSuperTokens = () => {
             clientId:
               '1060725074195-kmeum4crr01uirfl2op9kd5acmi9jutn.apps.googleusercontent.com',
             clientSecret: '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',
-          }),
-          Github({
-            clientId: '467101b197249757c71f',
-            clientSecret: 'e97051221f4b6426e8fe8d51486396703012f5bd',
           }),
         ],
         override: {
@@ -53,7 +48,7 @@ export const initSuperTokens = () => {
                   if (response.status === 'OK') {
                     // TODO: some post sign up logic
                     const user = response.user;
-                    // await createUser(user.email, user.id, user.thirdParty);
+                    await createUser(user.email, user.id, user.thirdParty);
                   }
                 } catch (error) {
                   //user not created in mongoDB while it is in supertokens db so need to delete the user from supertokens db
@@ -83,7 +78,7 @@ export const initSuperTokens = () => {
                     if (response.createdNewUser) {
                       // TODO: some post sign up logic
                       const user = response.user;
-                      // await createUser(user.email, user.id, user.thirdParty);
+                      await createUser(user.email, user.id, user.thirdParty);
                     } else {
                       // TODO: some post sign in logic
                     }
@@ -97,6 +92,13 @@ export const initSuperTokens = () => {
               },
             };
           },
+        },
+        signUpFeature: {
+          formFields: [
+            {
+              id: 'username',
+            },
+          ],
         },
       }),
       Session.init(), // initializes session features

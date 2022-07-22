@@ -1,13 +1,14 @@
-import 'dotenv/config';
-import express from 'express';
 import { connect } from './utils/connect';
-import logger from './utils/logger';
-import helmet from 'helmet';
 import { getAllCORSHeaders } from 'supertokens-node';
 import { middleware } from 'supertokens-node/framework/express';
-import cors from 'cors';
 import { errorHandler } from 'supertokens-node/framework/express';
 import { initSuperTokens } from './utils/initSuperTokens';
+import logger from './utils/logger';
+import helmet from 'helmet';
+import cors from 'cors';
+import userRouter from './routes/user.router';
+import express from 'express';
+import 'dotenv/config';
 
 initSuperTokens();
 
@@ -38,6 +39,8 @@ app.use(middleware());
 app.get('/', (_, res) => {
   res.send('Hello from learnify');
 });
+
+app.use('/users', userRouter);
 
 // Add this AFTER all your routes
 app.use(errorHandler());
