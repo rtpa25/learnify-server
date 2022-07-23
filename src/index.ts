@@ -1,14 +1,20 @@
-import { connect } from './utils/connect';
+//@dependencies
 import { getAllCORSHeaders } from 'supertokens-node';
 import { middleware } from 'supertokens-node/framework/express';
 import { errorHandler } from 'supertokens-node/framework/express';
-import { initSuperTokens } from './utils/initSuperTokens';
-import logger from './utils/logger';
 import helmet from 'helmet';
 import cors from 'cors';
-import userRouter from './routes/user.router';
 import express from 'express';
 import 'dotenv/config';
+
+//@internal-utils
+import logger from './utils/logger';
+import { initSuperTokens } from './utils/initSuperTokens';
+import { connect } from './utils/connect';
+
+//@routers
+import userRouter from './routes/user.router';
+import learningRouter from './routes/learning.router';
 
 initSuperTokens();
 
@@ -41,6 +47,7 @@ app.get('/', (_, res) => {
 });
 
 app.use('/users', userRouter);
+app.use('/learnings', learningRouter);
 
 // Add this AFTER all your routes
 app.use(errorHandler());

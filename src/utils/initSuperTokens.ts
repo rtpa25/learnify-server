@@ -1,14 +1,16 @@
 import Session from 'supertokens-node/recipe/session';
 import supertokens, { deleteUser } from 'supertokens-node';
 import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword';
-import { createUser } from '../services/user.service';
-let { Google, Github } = ThirdPartyEmailPassword;
+import { createUser, getUserBySupertokensId } from '../services/user.service';
+let { Google } = ThirdPartyEmailPassword;
 
 export const initSuperTokens = () => {
   supertokens.init({
     framework: 'express',
     supertokens: {
-      connectionURI: 'https://try.supertokens.io',
+      connectionURI:
+        'https://71fd05e16d0e11eca0fe73168c4aeb88-ap-southeast-1.aws.supertokens.io:3572',
+      apiKey: 'gWFypwtQ3Z7NIBrMr5B7SUB3URLaVb',
     },
     appInfo: {
       appName: 'learnify',
@@ -75,12 +77,11 @@ export const initSuperTokens = () => {
 
                 try {
                   if (response.status === 'OK') {
-                    if (response.createdNewUser) {
-                      // TODO: some post sign up logic
-                      const user = response.user;
+                    //should check if the loggedIn User is in our db
+                    const user = response.user;
+                    const fetchedUser = await getUserBySupertokensId(user.id);
+                    if (!fetchedUser) {
                       await createUser(user.email, user.id, user.thirdParty);
-                    } else {
-                      // TODO: some post sign in logic
                     }
                   }
                 } catch (error) {
