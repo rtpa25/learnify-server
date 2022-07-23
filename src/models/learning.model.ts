@@ -7,6 +7,7 @@ export interface LearningDocument extends Document {
   channelTitle: string;
   channelId: string;
   user: UserDocument['_id'];
+  playlistId: string;
 }
 
 const learningSchema = new Schema(
@@ -16,6 +17,7 @@ const learningSchema = new Schema(
     channelTitle: { type: String, required: true },
     channelId: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    playlistId: { type: String, required: true },
   },
   { timestamps: true }
 );

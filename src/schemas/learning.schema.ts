@@ -17,6 +17,9 @@ export const createLearningSchema = object({
     user: string({
       required_error: 'user is required',
     }),
+    playlistId: string({
+      required_error: 'playlistId is required',
+    }),
   }),
 });
 

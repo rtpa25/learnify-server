@@ -5,7 +5,8 @@ export async function createLearning(
   name: string,
   channelTitle: string,
   channelId: string,
-  userId: string
+  userId: string,
+  playlistId: string
 ) {
   const learning = await LearningModel.create({
     thumbnail,
@@ -13,6 +14,7 @@ export async function createLearning(
     channelId,
     channelTitle,
     user: userId,
+    playlistId,
   });
   return learning;
 }

@@ -12,13 +12,15 @@ export async function createLearningHandler(
   req: Request<{}, {}, CreateLearningInput>,
   res: Response
 ) {
-  const { thumbnail, channelId, channelTitle, name, user } = req.body;
+  const { thumbnail, channelId, channelTitle, name, user, playlistId } =
+    req.body;
   const learning = await createLearning(
     thumbnail,
     name,
     channelTitle,
     channelId,
-    user
+    user,
+    playlistId
   );
   res.status(201).send(learning);
 }
