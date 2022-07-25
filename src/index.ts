@@ -31,10 +31,7 @@ app.use(
 
 app.use(
   cors({
-    origin: [
-      'http://localhost:3000',
-      'https://auth-demo-frontend-six.vercel.app',
-    ],
+    origin: ['http://localhost:3000'],
     allowedHeaders: ['content-type', ...getAllCORSHeaders()],
     credentials: true,
   })

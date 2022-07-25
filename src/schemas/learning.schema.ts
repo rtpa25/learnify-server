@@ -31,6 +31,31 @@ export const getLearningSchema = object({
   }),
 });
 
+export const getLearningByIdSchema = object({
+  query: object({
+    learningId: string({
+      required_error: 'learningId is required',
+    }),
+  }),
+});
+
+export const updateLearningSchema = object({
+  body: object({
+    learningId: string({
+      required_error: 'learningId is required',
+    }),
+    lastSeenVideoId: string({
+      required_error: 'lastSeenVideoId is required',
+    }),
+  }),
+});
+
+export type UpdateLearningInput = TypeOf<typeof updateLearningSchema>['body'];
+
 export type GetLearningQuery = TypeOf<typeof getLearningSchema>['query'];
+
+export type GetLearningByIdQuery = TypeOf<
+  typeof getLearningByIdSchema
+>['query'];
 
 export type CreateLearningInput = TypeOf<typeof createLearningSchema>['body'];

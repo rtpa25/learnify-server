@@ -23,3 +23,18 @@ export async function getLearningsByUserId(userId: string) {
   const learnings = await LearningModel.find({ user: userId });
   return learnings;
 }
+
+export async function updateLearningById(
+  learningId: string,
+  lastSeenVideoId: string
+) {
+  const learning = await LearningModel.findByIdAndUpdate(learningId, {
+    lastSeenVideoId,
+  });
+  return learning;
+}
+
+export async function getLearningById(learningId: string) {
+  const learning = await LearningModel.findById(learningId);
+  return learning;
+}
