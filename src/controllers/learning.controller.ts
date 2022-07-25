@@ -3,6 +3,7 @@ import {
   CreateLearningInput,
   GetLearningByIdQuery,
   GetLearningQuery,
+  UpdateLastSeenTimeStampInput,
   UpdateLearningInput,
 } from '../schemas/learning.schema';
 import {
@@ -10,6 +11,7 @@ import {
   getLearningsByUserId,
   updateLearningById,
   getLearningById,
+  updateLastSeenVideoTimestampById,
 } from '../services/learning.service';
 
 export async function createLearningHandler(
@@ -53,5 +55,17 @@ export async function getLearningByIdHandler(
 ) {
   const { learningId } = req.query;
   const learning = await getLearningById(learningId);
+  res.status(200).send(learning);
+}
+
+export async function updateLastSeenVideoTimestampHandler(
+  req: Request<{}, {}, UpdateLastSeenTimeStampInput>,
+  res: Response
+) {
+  const { learningId, lastSeenVideoTimestamp } = req.body;
+  const learning = await updateLastSeenVideoTimestampById(
+    learningId,
+    lastSeenVideoTimestamp
+  );
   res.status(200).send(learning);
 }

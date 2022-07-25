@@ -9,6 +9,7 @@ export interface LearningDocument extends Document {
   user: UserDocument['_id'];
   playlistId: string;
   lastSeenVideoId?: string;
+  lastSeenVideoTimestamp?: number;
 }
 
 const learningSchema = new Schema(
@@ -20,6 +21,7 @@ const learningSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     playlistId: { type: String, required: true },
     lastSeenVideoId: { type: String },
+    lastSeenVideoTimestamp: { type: Number },
   },
   { timestamps: true }
 );

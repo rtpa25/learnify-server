@@ -1,4 +1,4 @@
-import { object, string, TypeOf } from 'zod';
+import { number, object, string, TypeOf } from 'zod';
 
 export const createLearningSchema = object({
   body: object({
@@ -50,7 +50,22 @@ export const updateLearningSchema = object({
   }),
 });
 
+export const updateLastSeenTimeStampSchema = object({
+  body: object({
+    learningId: string({
+      required_error: 'learningId is required',
+    }),
+    lastSeenVideoTimestamp: number({
+      required_error: 'lastSeenVideoTimestamp is required',
+    }),
+  }),
+});
+
 export type UpdateLearningInput = TypeOf<typeof updateLearningSchema>['body'];
+
+export type UpdateLastSeenTimeStampInput = TypeOf<
+  typeof updateLastSeenTimeStampSchema
+>['body'];
 
 export type GetLearningQuery = TypeOf<typeof getLearningSchema>['query'];
 

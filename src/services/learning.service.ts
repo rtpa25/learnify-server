@@ -38,3 +38,13 @@ export async function getLearningById(learningId: string) {
   const learning = await LearningModel.findById(learningId);
   return learning;
 }
+
+export async function updateLastSeenVideoTimestampById(
+  learningId: string,
+  lastSeenVideoTimestamp: number
+) {
+  const learning = await LearningModel.findByIdAndUpdate(learningId, {
+    lastSeenVideoTimestamp,
+  });
+  return learning;
+}
