@@ -15,6 +15,7 @@ import { connect } from './utils/connect';
 //@routers
 import userRouter from './routes/user.router';
 import learningRouter from './routes/learning.router';
+import noteRouter from './routes/note.router';
 
 initSuperTokens();
 
@@ -45,6 +46,7 @@ app.get('/', (_, res) => {
 
 app.use('/users', userRouter);
 app.use('/learnings', learningRouter);
+app.use('/notes', noteRouter);
 
 // Add this AFTER all your routes
 app.use(errorHandler());
