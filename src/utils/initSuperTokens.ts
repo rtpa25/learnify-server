@@ -2,20 +2,20 @@ import Session from 'supertokens-node/recipe/session';
 import supertokens, { deleteUser } from 'supertokens-node';
 import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword';
 import { createUser, getUserBySupertokensId } from '../services/user.service';
+import { __isProd__ } from './isProd';
 let { Google } = ThirdPartyEmailPassword;
 
 export const initSuperTokens = () => {
   supertokens.init({
     framework: 'express',
     supertokens: {
-      connectionURI:
-        'https://71fd05e16d0e11eca0fe73168c4aeb88-ap-southeast-1.aws.supertokens.io:3572',
-      apiKey: 'gWFypwtQ3Z7NIBrMr5B7SUB3URLaVb',
+      connectionURI: process.env.SUPERTOKENS_CONNECTION_URI as string,
+      apiKey: process.env.SUPERTOKENS_API_KEY as string,
     },
     appInfo: {
       appName: 'learnify',
-      apiDomain: 'http://localhost:8080',
-      websiteDomain: 'http://localhost:3000',
+      apiDomain: __isProd__ ? '' : 'http://localhost:8080',
+      websiteDomain: __isProd__ ? '' : 'http://localhost:3000',
       apiBasePath: '/auth',
       websiteBasePath: '/auth',
     },
