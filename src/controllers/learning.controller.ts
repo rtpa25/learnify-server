@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import {
   CreateLearningInput,
+  DeleteLearningQuery,
   GetLearningByIdQuery,
   GetLearningQuery,
   UpdateLastSeenTimeStampInput,
@@ -12,6 +13,7 @@ import {
   updateLearningById,
   getLearningById,
   updateLastSeenVideoTimestampById,
+  deleteLearningById,
 } from '../services/learning.service';
 
 export async function createLearningHandler(
@@ -68,4 +70,13 @@ export async function updateLastSeenVideoTimestampHandler(
     lastSeenVideoTimestamp
   );
   res.status(200).send(learning);
+}
+
+export async function deleteLearningHandler(
+  req: Request<{}, {}, {}, DeleteLearningQuery>,
+  res: Response
+) {
+  const { learningId } = req.query;
+  const deletedLearning = await deleteLearningById(learningId);
+  res.send(deletedLearning).status(200);
 }

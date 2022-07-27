@@ -39,6 +39,14 @@ export const getLearningByIdSchema = object({
   }),
 });
 
+export const deleteLearningByIdSchema = object({
+  query: object({
+    learningId: string({
+      required_error: 'learningId is required',
+    }),
+  }),
+});
+
 export const updateLearningSchema = object({
   body: object({
     learningId: string({
@@ -68,6 +76,10 @@ export type UpdateLastSeenTimeStampInput = TypeOf<
 >['body'];
 
 export type GetLearningQuery = TypeOf<typeof getLearningSchema>['query'];
+
+export type DeleteLearningQuery = TypeOf<
+  typeof deleteLearningByIdSchema
+>['query'];
 
 export type GetLearningByIdQuery = TypeOf<
   typeof getLearningByIdSchema

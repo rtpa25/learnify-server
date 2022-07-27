@@ -36,7 +36,7 @@ export async function getNotes(
     user: userId,
     learning: learningId,
     videoId,
-  });
+  }).sort({ timeStamp: 'descending' });
 
   return notes;
 }

@@ -48,3 +48,8 @@ export async function updateLastSeenVideoTimestampById(
   });
   return learning;
 }
+
+export async function deleteLearningById(learningId: string) {
+  const deletedLearning = await LearningModel.findByIdAndDelete(learningId);
+  return deletedLearning;
+}
