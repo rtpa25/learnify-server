@@ -30,6 +30,7 @@ app.use(
   })
 );
 
+//@cors
 app.use(
   cors({
     origin: [
@@ -42,8 +43,10 @@ app.use(
   })
 );
 
+//@supertokens
 app.use(middleware());
 
+//@health-check
 app.get('/', (_, res) => {
   res.send('Hello from learnify');
 });
