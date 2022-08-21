@@ -8,10 +8,14 @@ let { Google } = ThirdPartyEmailPassword;
 export const initSuperTokens = () => {
   supertokens.init({
     framework: 'express',
-    supertokens: {
-      connectionURI: process.env.SUPERTOKENS_CONNECTION_URI as string,
-      apiKey: process.env.SUPERTOKENS_API_KEY as string,
-    },
+    supertokens: __isProd__
+      ? {
+          connectionURI: process.env.SUPERTOKENS_CONNECTION_URI as string,
+          apiKey: process.env.SUPERTOKENS_API_KEY as string,
+        }
+      : {
+          connectionURI: 'https://try.supertokens.io',
+        },
     appInfo: {
       appName: 'learnify',
       apiDomain: __isProd__
